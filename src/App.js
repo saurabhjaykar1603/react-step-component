@@ -1,11 +1,23 @@
-import React from "react";
+import React, { useState } from "react";
 const messages = [
   "Learn React ⚛️",
   "Apply for jobs 💼",
   "Invest your new income 🤑",
 ];
 function App() {
-  const step = 1;
+  const [step, setStep] = useState(1);
+
+  function handlePrev() {
+    if (step > 1) {
+      setStep(step - 1);
+    }
+  }
+  function handleNext() {
+    if (step < messages.length) {
+      setStep(step + 1);
+    }
+  }
+
   return (
     <div className="steps">
       <div className="numbers">
@@ -22,14 +34,18 @@ function App() {
             backgroundColor: "#7950f2",
             color: "#fff",
           }}
+          onClick={handlePrev}
+          disabled={step <= 1}
         >
           Prev
         </button>
         <button
+          onClick={handleNext}
           style={{
             backgroundColor: "#7950f2",
             color: "#fff",
           }}
+          disabled={step >= messages.length}
         >
           Next
         </button>
